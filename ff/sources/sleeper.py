@@ -12,7 +12,7 @@ Everything here is read-only by design; the project never writes to Sleeper.
 
 from __future__ import annotations
 
-import time
+from uuid import uuid4
 
 import httpx
 import pandas as pd
@@ -201,6 +201,6 @@ def draft_picks(draft_id: str, *, client: httpx.Client | None = None) -> list:
         f"{V1}/draft/{draft_id}/picks",
         key=f"sleeper_draft_picks_{draft_id}",
         ttl=0,
-        params={"t": str(time.time_ns())},
+        params={"t": uuid4().hex},
         client=client,
     )

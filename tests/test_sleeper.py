@@ -70,7 +70,9 @@ def test_league_rosters_users_transactions_use_documented_endpoints():
     assert any(u.endswith("/league/L1/transactions/3") for u in urls)
 
 
-def test_draft_picks_adds_cache_buster_and_never_caches(tmp_cache_dir):
+def test_draft_picks_adds_cache_buster_and_never_caches(tmp_cache_dir, monkeypatch):
+    # Wall-clock resolution can repeat across rapid requests, especially on Windows.
+    monkeypatch.setattr("time.time_ns", lambda: 123456789)
     r = routes(**{"/draft/D1/picks": fixture_json("sleeper_draft_picks.json")})
     client = r.client()
 
