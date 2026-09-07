@@ -1,0 +1,43 @@
+{
+  "name": "Example Redraft League",
+  "league_id": "100003",
+  "total_rosters": 12,
+  "roster_positions": [
+    "QB",
+    "RB",
+    "RB",
+    "WR",
+    "WR",
+    "TE",
+    "FLEX",
+    "K",
+    "DEF",
+    "BN",
+    "BN",
+    "BN",
+    "BN",
+    "BN"
+  ],
+  "scoring_settings": {
+    "pass_yd": 0.04,
+    "pass_td": 6.0,
+    "pass_int": -2.0,
+    "rush_yd": 0.1,
+    "rush_td": 6.0,
+    "rec": 0.5,
+    "rec_yd": 0.1,
+    "rec_td": 6.0,
+    "fum_lost": -2.0
+  },
+  "settings": {
+    "type": 0,
+    "waiver_type": 0,
+    "waiver_budget": 100,
+    "waiver_day_of_week": 2,
+    "waiver_clear_days": 2,
+    "trade_deadline": 11,
+    "playoff_week_start": 15,
+    "reserve_slots": 2,
+    "bench_lock": 1
+  }
+}

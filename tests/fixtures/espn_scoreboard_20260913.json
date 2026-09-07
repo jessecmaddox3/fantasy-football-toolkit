@@ -1,0 +1,124 @@
+{
+  "events": [
+    {
+      "id": "0",
+      "date": "2026-09-13T17:00Z",
+      "competitions": [
+        {
+          "date": "2026-09-13T17:00Z",
+          "competitors": [
+            {
+              "homeAway": "home",
+              "team": {
+                "abbreviation": "CIN"
+              }
+            },
+            {
+              "homeAway": "away",
+              "team": {
+                "abbreviation": "TB"
+              }
+            }
+          ],
+          "odds": [
+            {
+              "provider": {
+                "name": "Example Lines"
+              },
+              "spread": -3.5,
+              "overUnder": 50.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1",
+      "date": "2026-09-13T17:00Z",
+      "competitions": [
+        {
+          "date": "2026-09-13T17:00Z",
+          "competitors": [
+            {
+              "homeAway": "home",
+              "team": {
+                "abbreviation": "IND"
+              }
+            },
+            {
+              "homeAway": "away",
+              "team": {
+                "abbreviation": "BAL"
+              }
+            }
+          ],
+          "odds": [
+            {
+              "provider": {
+                "name": "Example Lines"
+              },
+              "spread": 3.5,
+              "overUnder": 48.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "date": "2026-09-13T17:00Z",
+      "competitions": [
+        {
+          "date": "2026-09-13T17:00Z",
+          "competitors": [
+            {
+              "homeAway": "home",
+              "team": {
+                "abbreviation": "PHI"
+              }
+            },
+            {
+              "homeAway": "away",
+              "team": {
+                "abbreviation": "WSH"
+              }
+            }
+          ],
+          "odds": [
+            {
+              "provider": {
+                "name": "Example Lines"
+              },
+              "spread": -4.5,
+              "overUnder": 45.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "date": "2026-09-13T17:00Z",
+      "competitions": [
+        {
+          "date": "2026-09-13T17:00Z",
+          "competitors": [
+            {
+              "homeAway": "home",
+              "team": {
+                "abbreviation": "LAC"
+              }
+            },
+            {
+              "homeAway": "away",
+              "team": {
+                "abbreviation": "ARI"
+              }
+            }
+          ],
+          "odds": []
+        }
+      ]
+    }
+  ]
+}

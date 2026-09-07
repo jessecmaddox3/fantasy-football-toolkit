@@ -1,0 +1,88 @@
+{
+  "id": 100004,
+  "settings": {
+    "name": "Example ESPN League",
+    "size": 12,
+    "rosterSettings": {
+      "lineupSlotCounts": {
+        "0": 1,
+        "2": 2,
+        "4": 2,
+        "6": 1,
+        "16": 1,
+        "17": 1,
+        "23": 1,
+        "20": 5,
+        "21": 1
+      }
+    },
+    "acquisitionSettings": {
+      "acquisitionType": "WAIVERS_TRADITIONAL",
+      "isUsingAcquisitionBudget": false,
+      "waiverHours": 24,
+      "waiverProcessDays": [
+        "MONDAY",
+        "WEDNESDAY",
+        "THURSDAY",
+        "FRIDAY",
+        "SATURDAY",
+        "SUNDAY"
+      ]
+    },
+    "scheduleSettings": {
+      "matchupPeriodCount": 15,
+      "playoffTeamCount": 4,
+      "playoffMatchupPeriodLength": 1
+    },
+    "tradeSettings": {
+      "deadlineDate": 1796342400000
+    },
+    "draftSettings": {
+      "keeperCount": 2
+    },
+    "scoringSettings": {
+      "scoringItems": [
+        {
+          "statId": 3,
+          "points": 0.04
+        },
+        {
+          "statId": 4,
+          "points": 4
+        },
+        {
+          "statId": 20,
+          "points": -2
+        },
+        {
+          "statId": 24,
+          "points": 0.1
+        },
+        {
+          "statId": 25,
+          "points": 6
+        },
+        {
+          "statId": 42,
+          "points": 0.1
+        },
+        {
+          "statId": 43,
+          "points": 6
+        },
+        {
+          "statId": 53,
+          "points": 1
+        },
+        {
+          "statId": 72,
+          "points": -2
+        },
+        {
+          "statId": 999,
+          "points": 1
+        }
+      ]
+    }
+  }
+}

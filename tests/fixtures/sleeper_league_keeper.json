@@ -1,0 +1,52 @@
+{
+  "name": "Example Keeper League",
+  "league_id": "100001",
+  "total_rosters": 12,
+  "roster_positions": [
+    "QB",
+    "RB",
+    "RB",
+    "WR",
+    "WR",
+    "FLEX",
+    "FLEX",
+    "REC_FLEX",
+    "SUPER_FLEX",
+    "K",
+    "DEF",
+    "BN",
+    "BN",
+    "BN",
+    "BN",
+    "BN",
+    "BN",
+    "BN",
+    "BN",
+    "BN"
+  ],
+  "scoring_settings": {
+    "pass_yd": 0.04,
+    "pass_td": 4.0,
+    "pass_int": -2.0,
+    "rush_yd": 0.1,
+    "rush_td": 6.0,
+    "rec": 0.5,
+    "rec_yd": 0.1,
+    "rec_td": 6.0,
+    "fum_lost": -2.0,
+    "bonus_rec_te": 0.5,
+    "rec_fd": 0.5,
+    "rush_fd": 0.5
+  },
+  "settings": {
+    "type": 1,
+    "waiver_type": 2,
+    "waiver_budget": 1000,
+    "waiver_day_of_week": 2,
+    "waiver_clear_days": 2,
+    "trade_deadline": 11,
+    "playoff_week_start": 15,
+    "reserve_slots": 3,
+    "bench_lock": 1
+  }
+}

@@ -1,0 +1,246 @@
+[
+  {
+    "player_id": "9221",
+    "season": "2026",
+    "team": "DET",
+    "player": {
+      "first_name": "Jahmyr",
+      "last_name": "Gibbs",
+      "position": "RB",
+      "team": "DET",
+      "years_exp": 3,
+      "injury_status": null
+    },
+    "stats": {
+      "rush_yd": 1200,
+      "rush_td": 8,
+      "rec": 60,
+      "rec_yd": 800,
+      "rec_td": 5,
+      "adp_ppr": 1.0,
+      "adp_half_ppr": 2.0,
+      "adp_std": 3.0,
+      "adp_2qb": 4.0,
+      "adp_dynasty_2qb": 5.0
+    }
+  },
+  {
+    "player_id": "7564",
+    "season": "2026",
+    "team": "CIN",
+    "player": {
+      "first_name": "Ja'Marr",
+      "last_name": "Chase",
+      "position": "WR",
+      "team": "CIN",
+      "years_exp": 5,
+      "injury_status": null
+    },
+    "stats": {
+      "rush_yd": 0,
+      "rush_td": 0,
+      "rec": 58,
+      "rec_yd": 790,
+      "rec_td": 5,
+      "adp_ppr": 11.0,
+      "adp_half_ppr": 12.0,
+      "adp_std": 13.0,
+      "adp_2qb": 14.0,
+      "adp_dynasty_2qb": 15.0
+    }
+  },
+  {
+    "player_id": "4984",
+    "season": "2026",
+    "team": "BUF",
+    "player": {
+      "first_name": "Josh",
+      "last_name": "Allen",
+      "position": "QB",
+      "team": "BUF",
+      "years_exp": 8,
+      "injury_status": null
+    },
+    "stats": {
+      "pass_yd": 3800,
+      "pass_td": 28,
+      "rush_yd": 200,
+      "adp_ppr": 21.0,
+      "adp_half_ppr": 22.0,
+      "adp_std": 23.0,
+      "adp_2qb": 24.0,
+      "adp_dynasty_2qb": 25.0
+    }
+  },
+  {
+    "player_id": "11604",
+    "season": "2026",
+    "team": "LV",
+    "player": {
+      "first_name": "Brock",
+      "last_name": "Bowers",
+      "position": "TE",
+      "team": "LV",
+      "years_exp": 2,
+      "injury_status": null
+    },
+    "stats": {
+      "rush_yd": 0,
+      "rush_td": 0,
+      "rec": 54,
+      "rec_yd": 770,
+      "rec_td": 5,
+      "adp_ppr": 31.0,
+      "adp_half_ppr": 32.0,
+      "adp_std": 33.0,
+      "adp_2qb": 34.0,
+      "adp_dynasty_2qb": 35.0
+    }
+  },
+  {
+    "player_id": "12481",
+    "season": "2026",
+    "team": "NYG",
+    "player": {
+      "first_name": "Cam",
+      "last_name": "Skattebo",
+      "position": "RB",
+      "team": "NYG",
+      "years_exp": 1,
+      "injury_status": null
+    },
+    "stats": {
+      "rush_yd": 1120,
+      "rush_td": 8,
+      "rec": 52,
+      "rec_yd": 760,
+      "rec_td": 5,
+      "adp_ppr": 41.0,
+      "adp_half_ppr": 42.0,
+      "adp_std": 43.0,
+      "adp_2qb": 44.0,
+      "adp_dynasty_2qb": 45.0
+    }
+  },
+  {
+    "player_id": "12508",
+    "season": "2026",
+    "team": "NYG",
+    "player": {
+      "first_name": "Jaxson",
+      "last_name": "Dart",
+      "position": "QB",
+      "team": "NYG",
+      "years_exp": 1,
+      "injury_status": null
+    },
+    "stats": {
+      "pass_yd": 3500,
+      "pass_td": 25,
+      "rush_yd": 200,
+      "adp_ppr": 51.0,
+      "adp_half_ppr": 52.0,
+      "adp_std": 53.0,
+      "adp_2qb": 54.0,
+      "adp_dynasty_2qb": 55.0
+    }
+  },
+  {
+    "player_id": "13287",
+    "season": "2026",
+    "team": "ARI",
+    "player": {
+      "first_name": "Jeremiyah",
+      "last_name": "Love",
+      "position": "RB",
+      "team": "ARI",
+      "years_exp": 0,
+      "injury_status": null
+    },
+    "stats": {
+      "rush_yd": 1080,
+      "rush_td": 8,
+      "rec": 48,
+      "rec_yd": 740,
+      "rec_td": 5,
+      "adp_ppr": 61.0,
+      "adp_half_ppr": 62.0,
+      "adp_std": 63.0,
+      "adp_2qb": 64.0,
+      "adp_dynasty_2qb": 65.0
+    }
+  },
+  {
+    "player_id": "13279",
+    "season": "2026",
+    "team": "TEN",
+    "player": {
+      "first_name": "Carnell",
+      "last_name": "Tate",
+      "position": "WR",
+      "team": "TEN",
+      "years_exp": 0,
+      "injury_status": null
+    },
+    "stats": {
+      "rush_yd": 0,
+      "rush_td": 0,
+      "rec": 46,
+      "rec_yd": 730,
+      "rec_td": 5,
+      "adp_ppr": 71.0,
+      "adp_half_ppr": 72.0,
+      "adp_std": 73.0,
+      "adp_2qb": 74.0,
+      "adp_dynasty_2qb": 75.0
+    }
+  },
+  {
+    "player_id": "13269",
+    "season": "2026",
+    "team": "LV",
+    "player": {
+      "first_name": "Fernando",
+      "last_name": "Mendoza",
+      "position": "QB",
+      "team": "LV",
+      "years_exp": 0,
+      "injury_status": null
+    },
+    "stats": {
+      "pass_yd": 3200,
+      "pass_td": 22,
+      "rush_yd": 200,
+      "adp_ppr": 81.0,
+      "adp_half_ppr": 82.0,
+      "adp_std": 83.0,
+      "adp_2qb": 84.0,
+      "adp_dynasty_2qb": 85.0
+    }
+  },
+  {
+    "player_id": "13281",
+    "season": "2026",
+    "team": "NO",
+    "player": {
+      "first_name": "Jordyn",
+      "last_name": "Tyson",
+      "position": "WR",
+      "team": "NO",
+      "years_exp": 0,
+      "injury_status": null
+    },
+    "stats": {
+      "rush_yd": 0,
+      "rush_td": 0,
+      "rec": 42,
+      "rec_yd": 710,
+      "rec_td": 5,
+      "adp_ppr": 91.0,
+      "adp_half_ppr": 92.0,
+      "adp_std": 93.0,
+      "adp_2qb": 94.0,
+      "adp_dynasty_2qb": 95.0
+    }
+  }
+]

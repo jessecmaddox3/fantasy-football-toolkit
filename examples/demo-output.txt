@@ -1,0 +1,32 @@
+Fantasy Football Toolkit: offline demo
+All players, projections and league settings below are synthetic.
+No accounts, credentials, network requests or AI subscription required.
+
+DRAFT BOARD (season projections)
+rank  name               pos  team  bye  adp  proj   vor
+----  -----------------  ---  ----  ---  ---  -----  -----
+1     Frankie Receiver   WR   CIN   8    6.0  374.0  306.0
+2     Casey Runner       RB   DET   6    3.0  272.0  170.0
+3     Alex Quarterback   QB   BUF   7    1.0  306.0  102.0
+4     Gray Receiver      WR   SEA   -    7.0  153.0  85.0
+5     Blair Quarterback  QB   KC    -    2.0  204.0  0.0
+6     Drew Runner        RB   ATL   -    4.0  102.0  0.0
+7     Harper Receiver    WR   NYG   -    8.0  68.0   0.0
+8     Indigo Tight End   TE   LV    -    9.0  187.0  0.0
+9     Elliot Runner      RB   GB    -    5.0  51.0   -51.0
+
+LINEUP (weekly projections)
+slot  player            pos  team  proj  base  flags
+----  ----------------  ---  ----  ----  ----  -----
+QB    Alex Quarterback  QB   BUF   18.0  18.0
+RB    Casey Runner      RB   DET   16.0  16.0
+WR    Frankie Receiver  WR   CIN   22.0  22.0
+FLEX  Indigo Tight End  TE   LV    11.0  11.0
+
+projected: current 47.0 | optimal 67.0 | delta +20.0
+
+recommended moves:
+  WR: start Frankie Receiver (WR-CIN) over Harper Receiver (WR-NYG) (+18.0)
+  FLEX: start Indigo Tight End (TE-LV) over Gray Receiver (WR-SEA) (+2.0)
+
+best bench: Gray Receiver 9.0, Harper Receiver 4.0

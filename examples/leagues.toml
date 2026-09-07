@@ -1,0 +1,16 @@
+# Copy to leagues.toml, replace the placeholders, and remove unused sections.
+# IDs below are intentionally invalid so the example cannot query someone's league.
+[leagues.home]
+name = "My Sleeper league"
+platform = "sleeper"
+league_id = "YOUR_NUMERIC_LEAGUE_ID"
+user_id = "YOUR_NUMERIC_USER_ID"
+season = 2026
+
+# Uncomment for ESPN. Store ESPN_S2 and SWID in environment variables or .env.
+# [leagues.espn]
+# name = "My ESPN league"
+# platform = "espn"
+# league_id = "YOUR_NUMERIC_LEAGUE_ID"
+# team_id = 1
+# season = 2026

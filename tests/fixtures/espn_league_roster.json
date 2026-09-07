@@ -1,0 +1,354 @@
+{
+  "id": 100004,
+  "teams": [
+    {
+      "id": 1,
+      "name": "Example Team 1",
+      "abbrev": "T1",
+      "record": {
+        "overall": {
+          "wins": 0,
+          "losses": 0,
+          "pointsFor": 0
+        }
+      },
+      "roster": {
+        "entries": []
+      }
+    },
+    {
+      "id": 2,
+      "name": "Example Team 2",
+      "abbrev": "T2",
+      "record": {
+        "overall": {
+          "wins": 0,
+          "losses": 0,
+          "pointsFor": 0
+        }
+      },
+      "roster": {
+        "entries": []
+      }
+    },
+    {
+      "id": 3,
+      "name": "Example Team 3",
+      "abbrev": "T3",
+      "record": {
+        "overall": {
+          "wins": 0,
+          "losses": 0,
+          "pointsFor": 0
+        }
+      },
+      "roster": {
+        "entries": [
+          {
+            "lineupSlotId": 0,
+            "playerPoolEntry": {
+              "player": {
+                "id": 500,
+                "fullName": "Josh Allen",
+                "defaultPositionId": 1,
+                "proTeamId": 2,
+                "injuryStatus": "ACTIVE"
+              }
+            }
+          },
+          {
+            "lineupSlotId": 4,
+            "playerPoolEntry": {
+              "player": {
+                "id": 501,
+                "fullName": "Amon-Ra St. Brown",
+                "defaultPositionId": 3,
+                "proTeamId": 8,
+                "injuryStatus": "ACTIVE"
+              }
+            }
+          },
+          {
+            "lineupSlotId": 2,
+            "playerPoolEntry": {
+              "player": {
+                "id": 502,
+                "fullName": "Example Runner",
+                "defaultPositionId": 2,
+                "proTeamId": 12,
+                "injuryStatus": "QUESTIONABLE"
+              }
+            }
+          },
+          {
+            "lineupSlotId": 2,
+            "playerPoolEntry": {
+              "player": {
+                "id": 503,
+                "fullName": "Example Runner Two",
+                "defaultPositionId": 2,
+                "proTeamId": 12,
+                "injuryStatus": "ACTIVE"
+              }
+            }
+          },
+          {
+            "lineupSlotId": 4,
+            "playerPoolEntry": {
+              "player": {
+                "id": 504,
+                "fullName": "Example Receiver",
+                "defaultPositionId": 3,
+                "proTeamId": 12,
+                "injuryStatus": "ACTIVE"
+              }
+            }
+          },
+          {
+            "lineupSlotId": 6,
+            "playerPoolEntry": {
+              "player": {
+                "id": 505,
+                "fullName": "Example Tight End",
+                "defaultPositionId": 4,
+                "proTeamId": 12,
+                "injuryStatus": "ACTIVE"
+              }
+            }
+          },
+          {
+            "lineupSlotId": 16,
+            "playerPoolEntry": {
+              "player": {
+                "id": 506,
+                "fullName": "Titans D/ST",
+                "defaultPositionId": 16,
+                "proTeamId": 10,
+                "injuryStatus": "ACTIVE"
+              }
+            }
+          },
+          {
+            "lineupSlotId": 17,
+            "playerPoolEntry": {
+              "player": {
+                "id": 507,
+                "fullName": "Harrison Mevis",
+                "defaultPositionId": 5,
+                "proTeamId": 14,
+                "injuryStatus": "ACTIVE"
+              }
+            }
+          },
+          {
+            "lineupSlotId": 23,
+            "playerPoolEntry": {
+              "player": {
+                "id": 508,
+                "fullName": "Example Flex",
+                "defaultPositionId": 3,
+                "proTeamId": 12,
+                "injuryStatus": "ACTIVE"
+              }
+            }
+          },
+          {
+            "lineupSlotId": 20,
+            "playerPoolEntry": {
+              "player": {
+                "id": 509,
+                "fullName": "Drake London",
+                "defaultPositionId": 3,
+                "proTeamId": 1,
+                "injuryStatus": "ACTIVE"
+              }
+            }
+          },
+          {
+            "lineupSlotId": 20,
+            "playerPoolEntry": {
+              "player": {
+                "id": 510,
+                "fullName": "Example Bench 0",
+                "defaultPositionId": 2,
+                "proTeamId": 12,
+                "injuryStatus": "ACTIVE"
+              }
+            }
+          },
+          {
+            "lineupSlotId": 20,
+            "playerPoolEntry": {
+              "player": {
+                "id": 511,
+                "fullName": "Example Bench 1",
+                "defaultPositionId": 2,
+                "proTeamId": 12,
+                "injuryStatus": "ACTIVE"
+              }
+            }
+          },
+          {
+            "lineupSlotId": 20,
+            "playerPoolEntry": {
+              "player": {
+                "id": 512,
+                "fullName": "Example Bench 2",
+                "defaultPositionId": 2,
+                "proTeamId": 12,
+                "injuryStatus": "ACTIVE"
+              }
+            }
+          },
+          {
+            "lineupSlotId": 20,
+            "playerPoolEntry": {
+              "player": {
+                "id": 513,
+                "fullName": "Example Bench 3",
+                "defaultPositionId": 2,
+                "proTeamId": 12,
+                "injuryStatus": "ACTIVE"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "name": "Example Team 4",
+      "abbrev": "T4",
+      "record": {
+        "overall": {
+          "wins": 0,
+          "losses": 0,
+          "pointsFor": 0
+        }
+      },
+      "roster": {
+        "entries": []
+      }
+    },
+    {
+      "id": 5,
+      "name": "Example Team 5",
+      "abbrev": "T5",
+      "record": {
+        "overall": {
+          "wins": 0,
+          "losses": 0,
+          "pointsFor": 0
+        }
+      },
+      "roster": {
+        "entries": []
+      }
+    },
+    {
+      "id": 6,
+      "name": "Example Team 6",
+      "abbrev": "T6",
+      "record": {
+        "overall": {
+          "wins": 0,
+          "losses": 0,
+          "pointsFor": 0
+        }
+      },
+      "roster": {
+        "entries": []
+      }
+    },
+    {
+      "id": 7,
+      "name": "Example Team 7",
+      "abbrev": "T7",
+      "record": {
+        "overall": {
+          "wins": 0,
+          "losses": 0,
+          "pointsFor": 0
+        }
+      },
+      "roster": {
+        "entries": []
+      }
+    },
+    {
+      "id": 8,
+      "name": "Example Team 8",
+      "abbrev": "T8",
+      "record": {
+        "overall": {
+          "wins": 0,
+          "losses": 0,
+          "pointsFor": 0
+        }
+      },
+      "roster": {
+        "entries": []
+      }
+    },
+    {
+      "id": 9,
+      "name": "Example Team 9",
+      "abbrev": "T9",
+      "record": {
+        "overall": {
+          "wins": 0,
+          "losses": 0,
+          "pointsFor": 0
+        }
+      },
+      "roster": {
+        "entries": []
+      }
+    },
+    {
+      "id": 10,
+      "name": "Example Team 10",
+      "abbrev": "T10",
+      "record": {
+        "overall": {
+          "wins": 0,
+          "losses": 0,
+          "pointsFor": 0
+        }
+      },
+      "roster": {
+        "entries": []
+      }
+    },
+    {
+      "id": 11,
+      "name": "Example Team 11",
+      "abbrev": "T11",
+      "record": {
+        "overall": {
+          "wins": 0,
+          "losses": 0,
+          "pointsFor": 0
+        }
+      },
+      "roster": {
+        "entries": []
+      }
+    },
+    {
+      "id": 12,
+      "name": "Example Team 12",
+      "abbrev": "T12",
+      "record": {
+        "overall": {
+          "wins": 0,
+          "losses": 0,
+          "pointsFor": 0
+        }
+      },
+      "roster": {
+        "entries": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "name": "Example Dynasty League",
+  "league_id": "100002",
+  "total_rosters": 12,
+  "roster_positions": [
+    "QB",
+    "RB",
+    "RB",
+    "WR",
+    "WR",
+    "TE",
+    "FLEX",
+    "SUPER_FLEX",
+    "DEF",
+    "BN",
+    "BN",
+    "BN",
+    "BN",
+    "BN",
+    "BN",
+    "BN",
+    "BN",
+    "BN",
+    "BN"
+  ],
+  "scoring_settings": {
+    "pass_yd": 0.04,
+    "pass_td": 4.0,
+    "pass_int": -2.0,
+    "rush_yd": 0.1,
+    "rush_td": 6.0,
+    "rec": 1.0,
+    "rec_yd": 0.1,
+    "rec_td": 6.0,
+    "fum_lost": -2.0
+  },
+  "settings": {
+    "type": 2,
+    "waiver_type": 2,
+    "waiver_budget": 100,
+    "waiver_day_of_week": 2,
+    "waiver_clear_days": 3,
+    "trade_deadline": 12,
+    "playoff_week_start": 15,
+    "reserve_slots": 4,
+    "bench_lock": 1,
+    "taxi_slots": 4
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "players": [
+    {
+      "player": {
+        "id": 101,
+        "fullName": "Jahmyr Gibbs",
+        "defaultPositionId": 2,
+        "proTeamId": 8,
+        "injuryStatus": "ACTIVE",
+        "stats": [
+          {
+            "statSourceId": 1,
+            "seasonId": 2026,
+            "statSplitTypeId": 0,
+            "appliedTotal": 300.0
+          }
+        ]
+      }
+    }
+  ]
+}

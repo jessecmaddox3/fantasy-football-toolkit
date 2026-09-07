@@ -1,0 +1,27 @@
+name: Bug report
+description: Report a reproducible problem using synthetic data
+title: "Bug: "
+body:
+  - type: markdown
+    attributes:
+      value: "Never include cookies, credentials, real league responses or personal data. Use private vulnerability reporting for security problems."
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Python version and toolkit version
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps and synthetic input
+      description: Include your command and the smallest example that reproduces the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true

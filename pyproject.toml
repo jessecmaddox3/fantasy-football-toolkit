@@ -1,0 +1,41 @@
+[project]
+name = "fantasy-football-toolkit"
+version = "0.1.0"
+description = "Read-only Sleeper and ESPN fantasy football draft boards, lineup optimization, and weekly briefs"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "Jess Maddox"}]
+keywords = ["fantasy-football", "sleeper", "espn", "draft", "lineup-optimizer"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python :: 3",
+  "Topic :: Games/Entertainment",
+]
+dependencies = ["httpx>=0.27,<1", "pandas>=2.2,<3", "tzdata>=2024.1"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "build>=1,<2"]
+
+[project.scripts]
+ff = "ff.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/jessecmaddox3/fantasy-football-toolkit"
+Issues = "https://github.com/jessecmaddox3/fantasy-football-toolkit/issues"
+Source = "https://github.com/jessecmaddox3/fantasy-football-toolkit"
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["ff"]
+
+[tool.hatch.build.targets.sdist]
+include = ["ff", "tests", "examples", "docs", "README.md", "LICENSE", "NOTICE.md", "CONTRIBUTING.md", "SECURITY.md", "pyproject.toml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
