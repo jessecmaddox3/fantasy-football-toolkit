@@ -104,10 +104,11 @@ def build_rookie_board(
     byes: dict[str, int],
     top: int = 60,
 ) -> pd.DataFrame:
-    """First-year players ordered by dynasty superflex ADP.
+    """First-year players ordered by dynasty ADP for the league's format.
 
-    ``adp_dynasty_2qb`` is the market; DynastyProcess ``value_2qb`` is a model.
-    Where they disagree is the reason to look twice at a pick.
+    ``adp_dynasty_2qb``/``adp_dynasty_*`` is the market; the matching
+    DynastyProcess value column is a model. Where they disagree is the
+    reason to look twice at a pick.
     """
     df = projections[
         (projections["pos"].isin(startable_positions(rules)))
@@ -116,8 +117,9 @@ def build_rookie_board(
 
     scored = value_over_replacement(df, rules)
     adp_col = adp_field(rules)
+    value_col, ecr_col = ("value_2qb", "ecr_2qb") if rules.superflex else ("value_1qb", "ecr_1qb")
 
-    vals = dp_values[["merge_name", "value_2qb", "ecr_2qb"]].drop_duplicates("merge_name")
+    vals = dp_values.reindex(columns=["merge_name", value_col, ecr_col]).drop_duplicates("merge_name")
     scored["merge_name"] = scored["name"].map(dynastyprocess.normalize_name)
     joined = scored.merge(vals, on="merge_name", how="left")
 
@@ -128,8 +130,8 @@ def build_rookie_board(
             "team": joined["team"],
             "bye": joined["team"].map(byes).astype("Int64"),
             "adp": joined[adp_col] if adp_col in joined.columns else pd.NA,
-            "value_2qb": joined["value_2qb"],
-            "ecr_2qb": joined["ecr_2qb"],
+            value_col: joined[value_col],
+            ecr_col: joined[ecr_col],
             "proj": joined["proj_points"].round(1),
         }
     )
@@ -181,7 +183,8 @@ def cmd_board(args: argparse.Namespace) -> int:
         board = build_rookie_board(
             projections, rules, dynastyprocess.values(), byes=byes, top=args.top
         )
-        title = f"{ref.name} - rookie board ({adp_field(rules)} x DynastyProcess value_2qb)"
+        value_label = "value_2qb" if rules.superflex else "value_1qb"
+        title = f"{ref.name} - rookie board ({adp_field(rules)} x DynastyProcess {value_label})"
     else:
         board = build_board(projections, rules, byes=byes, top=args.top)
         title = f"{ref.name} - draft board (ADP: {adp_field(rules)})"
