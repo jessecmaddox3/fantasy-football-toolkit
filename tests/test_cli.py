@@ -1,3 +1,4 @@
+import dataclasses
 import json
 
 import pandas as pd
@@ -118,6 +119,37 @@ def test_rookie_board_columns():
     assert list(board.columns) == [
         "rank", "name", "pos", "team", "bye", "adp", "value_2qb", "ecr_2qb", "proj"
     ]
+
+
+def test_rookie_board_joins_dynastyprocess_value_1qb_for_one_qb_league():
+    rules = dataclasses.replace(leagues.normalize_league(DYNASTY, key="dynasty"), superflex=False)
+    vals = values()
+    expected = vals.set_index("player").loc["Jeremiyah Love"]
+
+    board = cli.build_rookie_board(projections(), rules, vals, byes=BYES, top=50)
+
+    love = board.set_index("name").loc["Jeremiyah Love"]
+    assert love["value_1qb"] == expected["value_1qb"]
+    assert love["ecr_1qb"] == expected["ecr_1qb"]
+
+
+def test_rookie_board_columns_one_qb():
+    rules = dataclasses.replace(leagues.normalize_league(DYNASTY, key="dynasty"), superflex=False)
+    board = cli.build_rookie_board(projections(), rules, values(), byes=BYES, top=50)
+    assert list(board.columns) == [
+        "rank", "name", "pos", "team", "bye", "adp", "value_1qb", "ecr_1qb", "proj"
+    ]
+
+
+def test_rookie_board_handles_missing_upstream_dynastyprocess_columns():
+    rules = leagues.normalize_league(DYNASTY, key="dynasty")
+    vals = values().drop(columns=["value_2qb", "ecr_2qb"])
+    board = cli.build_rookie_board(projections(), rules, vals, byes=BYES, top=50)
+    assert list(board.columns) == [
+        "rank", "name", "pos", "team", "bye", "adp", "value_2qb", "ecr_2qb", "proj"
+    ]
+    assert board["value_2qb"].isna().all()
+    assert board["ecr_2qb"].isna().all()
 
 
 # ---------------------------------------------------------------- rendering

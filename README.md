@@ -28,7 +28,7 @@ The demo uses fictional players and invented projections, performs no network re
 - **Draft boards:** score supplied player projections under your league rules, rank by value over replacement, select format-appropriate ADP, and attach bye weeks.
 - **Lineups:** solve starting slots and flex eligibility together, compare current and recommended starters, and account for kickoff locks, byes and unavailable players.
 - **Weekly briefs:** combine standings, roster flags, upcoming byes, waiver settings, deadlines and lineup decisions across configured leagues. Sleeper also supports retrospective bench-point analysis.
-- **Dynasty rookie boards:** select first-year players and optionally join DynastyProcess trade values. Its comparison columns currently use superflex values, even for a one-QB league.
+- **Dynasty rookie boards:** select first-year players and optionally join DynastyProcess trade values, using `value_1qb`/`ecr_1qb` for one-QB leagues and `value_2qb`/`ecr_2qb` for superflex leagues.
 
 This is an **alpha developer tool**. It does not submit waiver claims, trades, lineup changes or messages. You make changes in your fantasy platform yourself.
 
