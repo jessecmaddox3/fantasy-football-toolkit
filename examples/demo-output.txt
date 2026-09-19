@@ -25,8 +25,10 @@ FLEX  Indigo Tight End  TE   LV    11.0  11.0
 
 projected: current 47.0 | optimal 67.0 | delta +20.0
 
-recommended moves:
-  WR: start Frankie Receiver (WR-CIN) over Harper Receiver (WR-NYG) (+18.0)
-  FLEX: start Indigo Tight End (TE-LV) over Gray Receiver (WR-SEA) (+2.0)
+lineup changes (target assignments, not platform click order):
+  bench Harper Receiver (WR-NYG) from WR
+  bench Gray Receiver (WR-SEA) from FLEX
+  start Frankie Receiver (WR-CIN) in WR
+  start Indigo Tight End (TE-LV) in FLEX
 
 best bench: Gray Receiver 9.0, Harper Receiver 4.0

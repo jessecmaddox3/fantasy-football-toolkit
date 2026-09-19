@@ -52,7 +52,7 @@ def test_offline_demo_does_not_read_config_or_use_network(tmp_path, monkeypatch,
     assert cli.main(["demo"]) == 0
     text = capsys.readouterr().out
     assert "synthetic" in text.lower()
-    assert "vor" in text and "recommended moves" in text
+    assert "vor" in text and "lineup changes" in text
     assert not list(tmp_path.iterdir())
 
 def test_cache_and_output_are_not_written_to_installation(tmp_path, monkeypatch):

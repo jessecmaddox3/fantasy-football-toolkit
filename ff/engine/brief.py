@@ -37,6 +37,7 @@ from ff.engine.lineup import (
     league_lineup,
     now_eastern,
     starting_slots,
+    slot_labels,
 )
 from ff.leagues import LeagueRef, LeagueRules
 from ff.sources import nflverse, sleeper
@@ -308,9 +309,10 @@ def decisions_for(
         if result.delta >= SWAP_THRESHOLD:
             out.append(
                 f"set the lineup: +{result.delta:.1f} projected points across "
-                f"{len(result.swaps)} move(s)"
+                f"{len(result.moves)} assignment change(s)"
             )
-            out.extend(f"  {swap}" for swap in result.swaps)
+            out.append("  target assignments; apply in your platform's supported order:")
+            out.extend(f"  {move}" for move in result.moves)
         empty = [slot.name for slot in result.current if slot.player is None]
         if empty:
             out.append(f"empty starting slot(s): {', '.join(empty)}")
@@ -464,10 +466,10 @@ def render_league(brief: LeagueBrief) -> str:
             f"{result.optimal_points:.1f} optimal (**{result.delta:+.1f}**)"
         )
         rows = [
-            f"| {slot.name} | {slot.player.name if slot.player else '-'} | "
+            f"| {label} | {slot.player.name if slot.player else '-'} | "
             f"{slot.player.pos + '-' + (slot.player.team or '') if slot.player else '-'} | "
             f"{slot.points:.1f} | {', '.join(slot.player.flags) if slot.player else ''} |"
-            for slot in result.optimal
+            for label, slot in zip(slot_labels(result.optimal), result.optimal)
         ]
         out.append(
             "| Slot | Player | Pos | Proj | Flags |\n|---|---|---|---|---|\n"

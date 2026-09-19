@@ -1,11 +1,11 @@
 [project]
 name = "fantasy-football-toolkit"
-version = "0.1.0"
+version = "0.2.0"
 description = "Read-only Sleeper and ESPN fantasy football draft boards, lineup optimization, and weekly briefs"
 readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"
-license-files = ["LICENSE"]
+license-files = ["LICENSE", "NOTICE.md"]
 authors = [{name = "Jess Maddox"}]
 keywords = ["fantasy-football", "sleeper", "espn", "draft", "lineup-optimizer"]
 classifiers = [
@@ -34,7 +34,7 @@ build-backend = "hatchling.build"
 packages = ["ff"]
 
 [tool.hatch.build.targets.sdist]
-include = ["ff", "tests", "examples", "docs", "README.md", "LICENSE", "NOTICE.md", "CONTRIBUTING.md", "SECURITY.md", "pyproject.toml"]
+include = ["ff", "tests", "examples", "docs", "scripts", "README.md", "LICENSE", "NOTICE.md", "CONTRIBUTING.md", "SECURITY.md", "pyproject.toml"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

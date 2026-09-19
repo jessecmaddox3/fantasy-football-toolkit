@@ -39,6 +39,7 @@ the same clock ``games.csv`` uses.
 from __future__ import annotations
 
 import datetime as dt
+from collections import Counter
 from dataclasses import dataclass, replace
 from functools import lru_cache
 from typing import Iterable, Mapping, Sequence
@@ -49,7 +50,7 @@ import pandas as pd
 
 from ff.engine.value import FLEX_ELIGIBILITY
 from ff.leagues import LeagueRules
-from ff.sources import nflverse, odds as odds_source, sleeper, weather as weather_source
+from ff.sources import fantasypros, nflverse, odds as odds_source, sleeper, weather as weather_source
 from ff.sources.weather import GameWeather
 
 EASTERN = ZoneInfo("America/New_York")
@@ -147,15 +148,40 @@ class Slot:
 
 
 @dataclass(frozen=True)
+class LineupMove:
+    """A before/after assignment, not a claim about platform click order."""
+
+    action: str
+    player: PlayerLine
+    slot_index: int
+    slot: str
+    from_slot: str | None = None
+
+    def __str__(self) -> str:
+        if self.action == "move":
+            return f"move {self.player.label} from {self.from_slot} to {self.slot}"
+        if self.action == "bench":
+            return f"bench {self.player.label} from {self.slot}"
+        return f"start {self.player.label} in {self.slot}"
+
+
+@dataclass(frozen=True)
 class Swap:
-    """A concrete recommendation: start one player, sit another."""
+    """One replacement chain, with a direct swap as its simplest case."""
 
     slot: str
     start: PlayerLine
     sit: PlayerLine | None
     gain: float
+    repositions: tuple[LineupMove, ...] = ()
+    terminal_slot: str | None = None
 
     def __str__(self) -> str:
+        if self.repositions:
+            steps = ([f"bench {self.sit.label} from {self.terminal_slot}"] if self.sit else [])
+            steps.extend(str(move) for move in reversed(self.repositions))
+            steps.append(f"start {self.start.label} in {self.slot}")
+            return "; ".join(steps) + f" (chain {self.gain:+.1f})"
         sit = self.sit.label if self.sit else "an empty slot"
         return f"{self.slot}: start {self.start.label} over {sit} (+{self.gain:.1f})"
 
@@ -188,6 +214,10 @@ class LineupResult:
     @property
     def flagged(self) -> tuple[PlayerLine, ...]:
         return tuple(line for line in self.lines if line.flags)
+
+    @property
+    def moves(self) -> tuple[LineupMove, ...]:
+        return lineup_changes(self.current, self.optimal)
 
 
 # ----------------------------------------------------------------- adjusters
@@ -542,32 +572,59 @@ def optimal_lineup(
     )
 
 
+def slot_labels(slots: Sequence[Slot]) -> tuple[str, ...]:
+    counts = Counter(slot.name for slot in slots)
+    seen: Counter = Counter()
+    labels = []
+    for slot in slots:
+        seen[slot.name] += 1
+        labels.append(f"{slot.name} #{seen[slot.name]}" if counts[slot.name] > 1 else slot.name)
+    return tuple(labels)
+
+
+def lineup_changes(current: Sequence[Slot], optimal: Sequence[Slot]) -> tuple[LineupMove, ...]:
+    """Describe all benches, retained-player repositions and new starts by exact slot."""
+    before = {s.player.player_id: i for i, s in enumerate(current) if s.player}
+    after = {s.player.player_id: i for i, s in enumerate(optimal) if s.player}
+    old_labels, new_labels = slot_labels(current), slot_labels(optimal)
+    benches, repositions, starts = [], [], []
+    for i, slot in enumerate(current):
+        if slot.player and slot.player.player_id not in after:
+            benches.append(LineupMove("bench", slot.player, i, old_labels[i]))
+    for i, slot in enumerate(optimal):
+        if slot.player is None:
+            continue
+        old = before.get(slot.player.player_id)
+        if old is None:
+            starts.append(LineupMove("start", slot.player, i, new_labels[i]))
+        elif old != i:
+            repositions.append(LineupMove("move", slot.player, i, new_labels[i], old_labels[old]))
+    return tuple(benches + repositions + starts)
+
+
 def _swaps(current: Sequence[Slot], optimal: Sequence[Slot]) -> tuple[Swap, ...]:
-    """Pair the players coming in against the players going out, best first."""
+    """Follow each incoming player's actual vacancy chain, never sort unrelated pairs."""
     current_ids = {s.player.player_id for s in current if s.player}
-    optimal_ids = {s.player.player_id for s in optimal if s.player}
-
-    incoming = [
-        (i, s) for i, s in enumerate(optimal)
-        if s.player and s.player.player_id not in current_ids
-    ]
-    outgoing = [
-        s.player for s in current
-        if s.player and s.player.player_id not in optimal_ids
-    ]
-    incoming.sort(key=lambda pair: -pair[1].points)
-    outgoing.sort(key=lambda line: line.points)
-
+    destinations = {s.player.player_id: i for i, s in enumerate(optimal) if s.player}
+    old_labels, new_labels = slot_labels(current), slot_labels(optimal)
     swaps = []
-    for (_, slot), sit in zip(incoming, list(outgoing) + [None] * len(incoming)):
-        swaps.append(
-            Swap(
-                slot=slot.name,
-                start=slot.player,
-                sit=sit,
-                gain=slot.player.points - (sit.points if sit else 0.0),
-            )
-        )
+    for i, slot in enumerate(optimal):
+        if slot.player is None or slot.player.player_id in current_ids:
+            continue
+        cursor, repositions, visited = i, [], set()
+        occupant = current[cursor].player
+        while occupant and occupant.player_id in destinations:
+            if cursor in visited:
+                raise ValueError("invalid duplicate-player replacement chain")
+            visited.add(cursor)
+            target = destinations[occupant.player_id]
+            repositions.append(LineupMove("move", occupant, target,
+                                         new_labels[target], old_labels[cursor]))
+            cursor = target
+            occupant = current[cursor].player
+        swaps.append(Swap(new_labels[i], slot.player, occupant,
+                          slot.player.points - (occupant.points if occupant else 0.0),
+                          tuple(repositions), old_labels[cursor]))
     return tuple(swaps)
 
 
@@ -598,7 +655,7 @@ def league_lineup(
     team = roster_module.load_roster(ref, week, season=season, client=client,
                                      projections=projections, rules=rules)
     inactive = set(team.reserve) | set(team.taxi)
-    return optimal_lineup(
+    result = optimal_lineup(
         [pid for pid in team.player_ids if pid not in inactive],
         week,
         rules,
@@ -611,3 +668,8 @@ def league_lineup(
         now=now,
         fallbacks=team.fallbacks,
     )
+    consensus = fantasypros.lineup_notes(
+        result.lines, season, week,
+        reception_points=rules.scoring.get("rec", 0), client=client,
+    )
+    return replace(result, notes=result.notes + consensus)

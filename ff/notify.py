@@ -23,6 +23,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import TextIO
 
+from ff.cache import _write
+
 def output_dir() -> Path:
     return Path(os.environ.get("FF_OUTPUT_DIR", Path.cwd() / "data" / "out"))
 
@@ -136,7 +138,7 @@ class FileNotifier:
     def send(self, message: Message) -> str:
         self.directory.mkdir(parents=True, exist_ok=True)
         path = self.directory / f"{message.filename}{self.suffix}"
-        path.write_text(message.markdown())
+        _write(path, message.markdown())
         return str(path)
 
 
@@ -159,5 +161,5 @@ class SlackNotifier:
             )
         self.directory.mkdir(parents=True, exist_ok=True)
         path = self.directory / f"{message.filename}.json"
-        path.write_text(json.dumps(payload, indent=2))
+        _write(path, json.dumps(payload, indent=2))
         return str(path)

@@ -2,7 +2,7 @@
 
 > **TL;DR:** Improve setup, scoring coverage and provider compatibility while keeping the toolkit small and read-only.
 
-The first release concentrates on draft boards, weekly lineup analysis and briefs. These are contribution opportunities, not promised delivery dates:
+The toolkit includes draft boards, weekly lineup analysis, dated consensus references and briefs. These are contribution opportunities, not promised delivery dates:
 
 - Improve installation documentation based on a clean setup on Windows, macOS or Linux.
 - Add focused regression examples for supported scoring formats and unusual flex combinations.

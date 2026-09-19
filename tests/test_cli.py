@@ -187,14 +187,15 @@ def test_the_lineup_render_states_current_optimal_and_delta():
 
 def test_the_lineup_render_lists_the_recommended_moves():
     text = cli.render_lineup(lineup_result(), lineup_rules())
-    assert "recommended moves:" in text
+    assert "lineup changes (target assignments" in text
+    assert "bench WR2" in text
     assert "start WR1" in text
 
 
 def test_an_optimal_lineup_says_there_is_nothing_to_do():
     text = cli.render_lineup(lineup_result(starters=("WR1",)), lineup_rules())
     assert "already is the optimal one" in text
-    assert "recommended moves:" not in text
+    assert "lineup changes" not in text
 
 
 def test_the_lineup_render_shows_the_best_bench_players():

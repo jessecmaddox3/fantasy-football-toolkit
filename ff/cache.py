@@ -21,7 +21,7 @@ DAY = 86400
 HOUR = 3600
 WEEK = 7 * DAY
 
-USER_AGENT = "fantasy-football-toolkit/0.1"
+USER_AGENT = "fantasy-football-toolkit/0.2"
 
 
 def cache_dir() -> Path:

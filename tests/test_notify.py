@@ -1,4 +1,8 @@
 import io
+import os
+from pathlib import Path
+
+import pytest
 import json
 
 from ff import notify
@@ -102,3 +106,26 @@ def test_turning_off_the_dry_run_refuses_rather_than_guessing_a_channel(tmp_path
 
     with pytest.raises(NotImplementedError):
         notify.SlackNotifier(directory=tmp_path, dry_run=False).send(MESSAGE)
+
+
+@pytest.mark.skipif(os.name == "nt", reason="POSIX owner permissions")
+@pytest.mark.parametrize("notifier,suffix", [(notify.FileNotifier, ".md"), (notify.SlackNotifier, ".json")])
+def test_reports_are_private_even_when_replacing_a_public_file(tmp_path, notifier, suffix):
+    path = tmp_path / (MESSAGE.filename + suffix)
+    path.write_text("old")
+    path.chmod(0o644)
+    notifier(directory=tmp_path).send(MESSAGE)
+    assert path.stat().st_mode & 0o777 == 0o600
+
+
+@pytest.mark.parametrize("notifier,suffix", [(notify.FileNotifier, ".md"), (notify.SlackNotifier, ".json")])
+def test_failed_report_replacement_preserves_previous_copy(tmp_path, monkeypatch, notifier, suffix):
+    path = tmp_path / (MESSAGE.filename + suffix)
+    path.write_text("previous report")
+    def failed_replace(self, target):
+        raise OSError("synthetic full disk")
+    monkeypatch.setattr(Path, "replace", failed_replace)
+    with pytest.raises(OSError, match="full disk"):
+        notifier(directory=tmp_path).send(MESSAGE)
+    assert path.read_text() == "previous report"
+    assert list(tmp_path.iterdir()) == [path]

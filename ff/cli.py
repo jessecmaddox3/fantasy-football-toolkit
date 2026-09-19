@@ -17,12 +17,12 @@ from ff.engine import lineup as lineup_engine
 from ff.engine.value import FLEX_ELIGIBILITY, value_over_replacement
 from ff.leagues import LeagueRules, adp_field
 from ff.config import load_leagues
-from ff.sources import dynastyprocess, espn, nflverse, sleeper
+from ff.sources import dynastyprocess, espn, fantasypros, nflverse, sleeper
 
 DEFAULT_SEASON = 2026
 
 
-def current_week(season: int = DEFAULT_SEASON) -> int:
+def current_week(season: int = DEFAULT_SEASON, *, require_season_match: bool = False) -> int:
     """The NFL week Sleeper says we are on.
 
     Sleeper's ``/state/nfl`` is authoritative and free, which lets
@@ -31,6 +31,8 @@ def current_week(season: int = DEFAULT_SEASON) -> int:
     """
     state = sleeper.state()
     if str(state.get("season")) != str(season):
+        if require_season_match:
+            raise ValueError("Sleeper reports a different season; pass --week explicitly")
         return 1
     return int(state.get("week") or state.get("display_week") or 1)
 
@@ -203,10 +205,10 @@ def cmd_board(args: argparse.Namespace) -> int:
 def render_lineup(result: lineup_engine.LineupResult, rules: LeagueRules) -> str:
     """The lineup analysis as a fixed-width block, readable in a terminal."""
     rows = []
-    for slot in result.optimal:
+    for label, slot in zip(lineup_engine.slot_labels(result.optimal), result.optimal):
         player = slot.player
         rows.append({
-            "slot": slot.name,
+            "slot": label,
             "player": player.name if player else "-",
             "pos": player.pos if player else "-",
             "team": (player.team or "-") if player else "-",
@@ -221,10 +223,10 @@ def render_lineup(result: lineup_engine.LineupResult, rules: LeagueRules) -> str
         f"projected: current {result.current_points:.1f} | "
         f"optimal {result.optimal_points:.1f} | delta {result.delta:+.1f}"
     )
-    if result.swaps:
+    if result.moves:
         lines.append("")
-        lines.append("recommended moves:")
-        lines.extend(f"  {swap}" for swap in result.swaps)
+        lines.append("lineup changes (target assignments, not platform click order):")
+        lines.extend(f"  {move}" for move in result.moves)
     else:
         lines.append("the lineup already is the optimal one")
 
@@ -296,9 +298,36 @@ def cmd_brief(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_refresh_fantasypros(args: argparse.Namespace) -> int:
+    week = args.week or current_week(args.season, require_season_match=True)
+    if not 1 <= week <= 18:
+        raise ValueError("--week must be between 1 and 18")
+    failed = False
+    for scoring, position in fantasypros.PAGES:
+        try:
+            data = fantasypros.weekly_rankings(args.season, week, scoring=scoring,
+                                              position=position, ttl=0)
+            print(f"FantasyPros {args.season} week {week} {scoring}/{position}: "
+                  f"{data['count']} players; source {data['published_at']}; "
+                  f"retrieved {data['retrieved_at']}")
+            if data.get("cache_saved") is False:
+                failed = True
+                print(data["cache_note"], file=sys.stderr)
+        except (fantasypros.RankingsError, httpx.HTTPError, OSError) as exc:
+            failed = True
+            print(f"FantasyPros UNAVAILABLE {scoring}/{position}: "
+                  f"{fantasypros.failure_reason(exc)}", file=sys.stderr)
+    return 1 if failed else 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="ff", description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
+
+    refresh = sub.add_parser("refresh-fantasypros", help="refresh dated weekly consensus, no league config needed")
+    refresh.add_argument("--season", type=int, default=DEFAULT_SEASON)
+    refresh.add_argument("--week", type=int, help="default: Sleeper's current week for this season")
+    refresh.set_defaults(func=cmd_refresh_fantasypros)
 
     board = sub.add_parser("board", help="print a draft board for one league")
     board.add_argument("--league", required=True)
@@ -356,6 +385,12 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "demo":
         return args.func(args)
     try:
+        if args.command == "refresh-fantasypros":
+            if not 2000 <= args.season <= 2100:
+                raise ValueError("--season must be between 2000 and 2100")
+            if args.week is not None and not 1 <= args.week <= 18:
+                raise ValueError("--week must be between 1 and 18")
+            return args.func(args)
         args.refs = load_leagues(args.config)
         if args.command == "lineup":
             if bool(args.league) == bool(args.all):

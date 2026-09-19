@@ -23,5 +23,5 @@ jobs:
       - run: python -m pip install '.[dev]'
       - run: python -m pytest tests
       - run: python -m build
-      - name: Verify installed package outside checkout
-        run: python -c "import subprocess,sys,tempfile; subprocess.run([sys.executable,'-m','ff.cli','demo'],cwd=tempfile.mkdtemp(),check=True)"
+      - name: Verify exact built wheel outside checkout
+        run: python scripts/verify_distribution.py

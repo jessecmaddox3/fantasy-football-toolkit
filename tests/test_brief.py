@@ -208,7 +208,8 @@ def test_a_worthwhile_lineup_change_becomes_a_decision_with_its_swaps():
 
     assert got[0].startswith("set the lineup: +12.0")
     assert got[1].startswith("  ")
-    assert "start WR1" in got[1]
+    assert any("start WR1" in item and "in WR" in item for item in got)
+    assert any("bench WR2" in item and "from WR" in item for item in got)
 
 
 def test_a_lineup_already_optimal_produces_no_lineup_decision():

@@ -15,7 +15,7 @@ def test_espn_flex_draft_boards_include_eligible_players(slot, positions):
 
 
 def test_reserve_and_taxi_players_are_not_recommended(monkeypatch):
-    from ff.sources import nflverse, weather, odds
+    from ff.sources import nflverse, weather, odds, fantasypros
     league = rules({'WR':1}, scoring={'rec':1.})
     ref = LeagueRef('home','Home','sleeper','100001',user_id='200001')
     team = roster.Team('home','Home','sleeper','1',player_ids=('active','reserve','taxi'), starters=('active',), reserve=('reserve',), taxi=('taxi',))
@@ -24,10 +24,15 @@ def test_reserve_and_taxi_players_are_not_recommended(monkeypatch):
     monkeypatch.setattr(weather,'week_weather',lambda *a,**kw:{})
     monkeypatch.setattr(odds,'week_implied_totals',lambda *a,**kw:{})
     monkeypatch.setattr(lineup,'kickoffs_for_week',lambda *a,**kw:{})
+    def consensus(lines, *args, **kwargs):
+        assert [line.player_id for line in lines] == ['active']
+        return ('Synthetic consensus reference included.',)
+    monkeypatch.setattr(fantasypros, 'lineup_notes', consensus)
     frame=pd.DataFrame([{'player_id':p,'name':p,'pos':'WR','team':'KC','rec':points} for p,points in [('active',5),('reserve',20),('taxi',30)]])
     result=lineup.league_lineup(ref,1,rules=league,projections=frame)
     assert result.optimal[0].player.player_id == 'active'
     assert result.swaps == ()
+    assert result.notes[-1] == 'Synthetic consensus reference included.'
 
 
 def test_espn_injured_reserve_is_preserved():
