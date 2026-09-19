@@ -148,7 +148,7 @@ def value_over_replacement(
     scoring: Mapping[str, float] | None = None,
     positions: Iterable[str] | None = None,
 ) -> pd.DataFrame:
-    """Add ``proj_points``, ``replacement`` and ``vor``, best VOR first."""
+    """Add ``proj_points``, ``replacement`` and ``vor``, best VOR first; ties preserve input order."""
     scoring = scoring if scoring is not None else rules.scoring
     out = df.copy()
     if positions is not None:
@@ -160,4 +160,4 @@ def value_over_replacement(
     levels = replacement_level(out, rules)
     out["replacement"] = out["pos"].map(levels).fillna(0.0)
     out["vor"] = out["proj_points"] - out["replacement"]
-    return out.sort_values("vor", ascending=False).reset_index(drop=True)
+    return out.sort_values("vor", ascending=False, kind="stable").reset_index(drop=True)

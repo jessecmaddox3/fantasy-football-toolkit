@@ -168,3 +168,11 @@ def test_value_over_replacement_sorts_best_first():
     ])
     out = value.value_over_replacement(df, rules({"RB": 1}, teams=1))
     assert out.iloc[0]["name"] == "high"
+
+
+def test_equal_value_players_keep_input_order_across_platforms():
+    points=[3,1,2,1,3,2,1,3,2,1]*5
+    frame=pd.DataFrame([{'name':f'Fictional Runner {i}', 'pos':'RB', 'rec':p} for i,p in enumerate(points)])
+    board=value.value_over_replacement(frame,rules({'RB':1},teams=1,scoring={'rec':1}))
+    for p in (1,2,3):
+        assert list(board.loc[board.proj_points==p,'name']) == list(frame.loc[frame.rec==p,'name'])

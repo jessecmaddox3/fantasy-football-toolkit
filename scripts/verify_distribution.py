@@ -4,6 +4,7 @@ Run in a disposable virtual environment. Network is used by pip for dependencies
 no network, league configuration or files are used by the installed demo.
 """
 import pathlib
+import difflib
 import subprocess
 import sys
 import tempfile
@@ -40,6 +41,8 @@ with tempfile.TemporaryDirectory() as outside:
                                text=True, capture_output=True, check=True)
     expected = (root / 'examples' / 'demo-output.txt').read_text()
     if completed.stdout != expected:
+        print(''.join(difflib.unified_diff(expected.splitlines(True), completed.stdout.splitlines(True),
+                                         fromfile='example', tofile='installed demo')))
         raise SystemExit('Installed demo output differs from the checked-in example.')
     subprocess.run([sys.executable, '-I', '-m', 'ff.cli', '--help'], cwd=outside, check=True)
 print('Exact built wheel: licenses, isolated imports, offline demo and sample output verified.')
